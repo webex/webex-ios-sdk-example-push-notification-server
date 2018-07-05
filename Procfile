@@ -1,0 +1,1 @@
+web: java -jar target/ios-pns-example-1.0.jar
