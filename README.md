@@ -1,8 +1,8 @@
 # Overview
 
-[Cisco Webex iOS SDK](https://developer.webex.com/sdk-for-ios.html) enables you to embed [Cisco Webex](https://www.webex.com/) calling and meeting experience into your iOS mobile application. The SDK provides APIs to make and receive audio/video calls. In order to receive audio/video calls, the user needs to be notified when someone is calling the user.
+[Cisco Webex iOS SDK](https://developer.webex.com/docs/sdks/ios) enables you to embed [Cisco Webex](https://www.webex.com/) calling and meeting experience into your iOS mobile application. The SDK provides APIs to make and receive audio/video calls. In order to receive audio/video calls, the user needs to be notified when someone is calling the user.
 
-This sample Webhook/Push Notification Server demonstrates how to write a server application to receive [Incoming Call Notification](https://developer.webex.com/sdk-for-ios.html) from Cisco Webex and use [Apple Push Notification Service](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1) to notify the mobile application.
+This sample Webhook/Push Notification Server demonstrates how to write a server application to receive [Incoming Call Notification](https://developer.webex.com/docs/sdks/ios) from Cisco Webex and use [Apple Push Notification Service](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1) to notify the mobile application.
 
 This sample is built upon [apns4j](https://github.com/teaey/apns4j) and [Sprint Boot](https://projects.spring.io/spring-boot). It is designed to be deployed and run on [Heroku](https://www.heroku.com). But it can be deployed and run on other environments with minimal changes.
 
@@ -55,7 +55,7 @@ Assuming this sample Webook/Push Notification Server has been deployed on the pu
 
 For more details about Step 1 and 2, please see [Apple Push Notifications Guide]((https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/index.html#//apple_ref/doc/uid/TP40008194-CH3-SW1))
 
-For more details about Step 3 and 6, please see Cisco Webex [Webhooks Explained](https://developer.webex.com/webhooks-explained.html)
+For more details about Step 3 and 6, please see Cisco Webex [Webhooks Guide](https://developer.webex.com/docs/api/guides/webhooks)
 
 # Deployment
 
@@ -88,7 +88,7 @@ The sample application can be easily deployed as a [Java application on the Hero
 
 The sample Webhook/Push Notification server provides three REST API endpoints.
 
-* `POST /webhook` -- This REST API endpoint should be used as the target URL for Cisco Webex [Webhooks Explained](https://developer.webex.com/webhooks-explained.html). Cisco Webex post the incoming call event to this endpoint.
+* `POST /webhook` -- This REST API endpoint should be used as the target URL for Cisco Webex [Webhooks Guide](https://developer.webex.com/docs/api/guides/webhooks). Cisco Webex post the incoming call event to this endpoint.
 
 	Please see [the implementation](https://github.com/webex/webex-ios-sdk-example-push-notification-server/blob/master/src/main/java/com/ciscowebex/iossdk/example/pns/Main.java#L117) for more details.
 
