@@ -3,3 +3,7 @@ target
 .idea/
 *.iml
 # .jdk-overlay/**/*.p12
+# vscode files
+.project
+.classpath
+.settings
