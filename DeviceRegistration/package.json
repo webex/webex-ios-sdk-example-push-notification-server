@@ -1,0 +1,11 @@
+{
+  "name": "DeviceRegistration",
+  "version": "1.0.0",
+  "description": "Handle device registrations for Apple & Android devices for WebexSDK",
+  "main": "function.js",
+  "author": "Bharath Balan",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1368.0"
+  }
+}

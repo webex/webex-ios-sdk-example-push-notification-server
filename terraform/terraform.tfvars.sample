@@ -1,0 +1,12 @@
+aws_region = "us-east-1"
+apns_bundle_id = "com.example.app"
+apns_team_id = "my_team_id"
+apns_token_key = <<-EOT
+  -----BEGIN PRIVATE KEY-----
+BLAH BLAH BLAH
+-----END PRIVATE KEY-----
+  EOT
+apns_token_key_id = "you_token_key_id"
+fcm_api_key = "your_fcm_api_key"
+root_domain_name="youdomain.com"
+domain_name = "webhooks.youdomain.com"
