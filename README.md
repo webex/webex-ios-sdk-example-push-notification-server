@@ -6,10 +6,10 @@ Terraform Referenced from: https://www.youtube.com/watch?v=bybQxpM0kSQ
 2. Obtain "terraform.tfvars" file and place it in terraform folder
 3. Run the following commands
 ``` BASH
-./terraform.sh
+./deploy.sh
 ```
 4. Done
 
 NOTE:
-If you want to see what the changes would look like before applying, do `cd terraform && terraform plan`
-If you want to see apply the changes, do `cd terraform && terraform apply`
+- If you want to see what the changes would look like before applying, do `cd terraform && terraform plan`
+- If you want to apply the changes, do `cd terraform && terraform apply`
