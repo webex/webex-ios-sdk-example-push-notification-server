@@ -50,6 +50,8 @@ const handleWebhookPayload = async (payload, tokens) => {
   var addresses = {};
   var apnsMessage = {};
   var fcmMessage = {};
+
+  const startTime = (new Date()).getTime();
   if ("resource" in payload && payload["resource"] == "telephony_push") {
     // pass only the respective payloads from bsft
     var rawAPNSBody = JSON.stringify({
@@ -66,7 +68,7 @@ const handleWebhookPayload = async (payload, tokens) => {
     };
 
     fcmMessage = {
-      RawContent: rawFCMBody,
+      Data: { webhookTelephonyPush : rawFCMBody},
       SilentPush: true,
       TimeToLive: 60,
       Priority: "high",
@@ -118,8 +120,23 @@ const handleWebhookPayload = async (payload, tokens) => {
       }, {});
   }
 
-  return await invokePinpointSendMessage(apnsMessage, fcmMessage, addresses);
+  await invokePinpointSendMessage(apnsMessage, fcmMessage, addresses);
+  
+  console.log("fcmMessage "+ JSON.stringify(fcmMessage))
+  console.log("PROFILETIME: "+payload["resource"]+ " "+getUserId(payload)+ " "+((new Date()).getTime()-startTime));
+
+  return;
 };
+
+const getUserId = (body) => {
+  let userId = body["createdBy"];
+  if ("resource" in body) {
+    if(body["resource"] == "telephony_push") {
+      userId =  body["actorId"]
+    }
+  }
+  return userId;
+}
 
 exports.handler = async (event) => {
   console.log("Event: ", event);
@@ -132,7 +149,7 @@ exports.handler = async (event) => {
     };
     return response;
   }
-  const userId = body["createdBy"];
+  const userId = getUserId(body);
   try {
     /// Using the userId, query all deviceIds in the DDB, then loop and call a method for each of the found deviceId
     const result = await getTokenForUserId(userId);
