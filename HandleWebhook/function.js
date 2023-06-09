@@ -58,6 +58,7 @@ const handleWebhookPayload = async (payload, tokens) => {
       ...payload.data.apnsPayload,
       aps: {},
       "content-available": 1,
+      "source" : "webhook"
     });
     var rawFCMBody = JSON.stringify(payload.data.fcmPayload);
 
@@ -75,15 +76,22 @@ const handleWebhookPayload = async (payload, tokens) => {
     };
 
     addresses = tokens
-      .map((item) => {
-        return item.pushProvider == "APNS" ? item.voipToken : item.deviceToken;
-      })
-      .reduce((accum, item) => {
-        accum[item] = {
-          ChannelType:
-            item.pushProvider == "APNS" ? "APNS_VOIP_SANDBOX" : "GCM",
-        };
-        return accum;
+    .map((item) => {
+        let ret = {}
+        if(item.pushProvider == "APNS"){
+            let pushType = "APNS_VOIP_SANDBOX";
+            if(item.prod) {
+                pushType = "APNS_VOIP";
+            }
+             ret[item.voipToken] = { ChannelType : pushType }
+        }else {
+            ret[item.deviceToken] = { ChannelType : "GCM"}
+        }
+    
+      return ret;
+    }).reduce((acc, item) => {
+        for (let key in item) acc[key] = item[key];
+        return acc;
       }, {});
   } else {
     // Just push the webhook data as it is via Normal APNS / FCM
@@ -111,12 +119,22 @@ const handleWebhookPayload = async (payload, tokens) => {
     };
 
     addresses = tokens
-      .map((item) => item.deviceToken)
-      .reduce((accum, item) => {
-        accum[item] = {
-          ChannelType: item.pushProvider == "APNS" ? "APNS_SANDBOX" : "GCM",
-        };
-        return accum;
+    .map((item) => {
+        let ret = {}
+        if(item.pushProvider == "APNS"){
+            let pushType = "APNS_SANDBOX";
+            if(item.prod) {
+                pushType = "APNS";
+            }
+             ret[item.deviceToken] = { ChannelType : pushType }
+        }else {
+            ret[item.deviceToken] = { ChannelType : "GCM"}
+        }
+    
+      return ret;
+    }).reduce((acc, item) => {
+        for (let key in item) acc[key] = item[key];
+        return acc;
       }, {});
   }
 
