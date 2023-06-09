@@ -87,6 +87,10 @@ exports.handler = async (event) => {
     ) {
       try {
         let { userId, deviceToken, pushProvider } = body;
+        let prod = false;
+        if( "prod" in body){
+          prod = body["prod"] == true
+        }
         let voipToken = "";
         if ("voipToken" in body) {
           voipToken = body["voipToken"];
@@ -95,7 +99,8 @@ exports.handler = async (event) => {
           userId,
           deviceToken,
           pushProvider,
-          voipToken
+          voipToken,
+          prod
         );
         console.log(
           `Added new deviceToken for userId: ${body["userId"]} for pushProvider: ${body["pushProvider"]}`
