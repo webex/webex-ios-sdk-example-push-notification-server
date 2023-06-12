@@ -10,7 +10,8 @@ const storeTokenForUserId = async (
   userId,
   deviceToken,
   pushProvider,
-  voipToken = ""
+  voipToken = "",
+  prod = false
 ) => {
   var params = {
     TableName: TABLE_NAME,
@@ -19,6 +20,7 @@ const storeTokenForUserId = async (
       userId: userId,
       pushProvider: pushProvider,
       voipToken: voipToken,
+      prod : prod,
       updatedAt: new Date().toISOString(),
     },
   };
